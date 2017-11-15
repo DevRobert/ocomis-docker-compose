@@ -7,23 +7,23 @@ services:
      - "80:80"
     links:
      - ocomis-info
-     - ocomis-user-ui
-     - ocomis-user-api
+#     - ocomis-user-ui
+#     - ocomis-user-api
      - ocomis-authentication-ui
      - ocomis-authentication-api
-     - ocomis-note-ui
-     - ocomis-note-api
+#     - ocomis-note-ui
+#     - ocomis-note-api
   ocomis-info:
     image: "blutner/ocomis-info:latest"
-  ocomis-user-ui:
-    image: "blutner/ocomis-user-ui:latest"
-  ocomis-user-api:
-    image: "blutner/ocomis-user-api:latest"
+#  ocomis-user-ui:
+#    image: "blutner/ocomis-user-ui:latest"
+#  ocomis-user-api:
+#    image: "blutner/ocomis-user-api:latest"
   ocomis-authentication-ui:
     image: "blutner/ocomis-authentication-ui:latest"
   ocomis-authentication-api:
     image: "blutner/ocomis-authentication-api:latest"
-  ocomis-note-ui:
-    image: "blutner/ocomis-note-ui:latest"
-  ocomis-note-api:
-    image: "blutner/ocomis-note-api:latest"
+#  ocomis-note-ui:
+#    image: "blutner/ocomis-note-ui:latest"
+#  ocomis-note-api:
+#    image: "blutner/ocomis-note-api:latest"
