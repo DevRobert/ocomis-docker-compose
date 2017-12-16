@@ -7,18 +7,20 @@ services:
      - "80:80"
     links:
      - ocomis-info
-#     - ocomis-user-ui
-#     - ocomis-user-api
+     - ocomis-user-ui
+     - ocomis-user-api
      - ocomis-authentication-ui
      - ocomis-authentication-api
 #     - ocomis-note-ui
 #     - ocomis-note-api
   ocomis-info:
     image: "blutner/ocomis-info:latest"
-#  ocomis-user-ui:
-#    image: "blutner/ocomis-user-ui:latest"
-#  ocomis-user-api:
-#    image: "blutner/ocomis-user-api:latest"
+  ocomis-user-ui:
+    image: "blutner/ocomis-user-ui:latest"
+  ocomis-user-api:
+    image: "blutner/ocomis-user-api:latest"
+    links:
+     - user-database
   ocomis-authentication-ui:
     image: "blutner/ocomis-authentication-ui:latest"
   ocomis-authentication-api:
@@ -27,3 +29,13 @@ services:
 #    image: "blutner/ocomis-note-ui:latest"
 #  ocomis-note-api:
 #    image: "blutner/ocomis-note-api:latest"
+
+  user-database:
+    restart: always
+    image: postgres:10.1
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=testtest
+      - POSTGRES_DB=ocomis-user
