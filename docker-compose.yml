@@ -4,38 +4,60 @@ services:
   ocomis-haproxy:
     image: "blutner/ocomis-haproxy:latest"
     ports:
-     - "80:80"
-    links:
-     - ocomis-info
-     - ocomis-user-ui
-     - ocomis-user-api
-     - ocomis-authentication-ui
-     - ocomis-authentication-api
-#     - ocomis-note-ui
-#     - ocomis-note-api
+      - "80:80"
+    networks:
+      - ocomis-services
+
   ocomis-info:
     image: "blutner/ocomis-info:latest"
+    networks:
+      - ocomis-services
+      - ocomis-logging
+
   ocomis-user-ui:
     image: "blutner/ocomis-user-ui:latest"
+    networks:
+      - ocomis-services
+      - ocomis-logging
+
   ocomis-user-api:
     image: "blutner/ocomis-user-api:latest"
-    links:
-     - user-database
+    depends_on:
+      - ocomis-user-database
+    networks:
+      - ocomis-services
+      - ocomis-logging
+
   ocomis-authentication-ui:
     image: "blutner/ocomis-authentication-ui:latest"
+    networks:
+      - ocomis-services
+      - ocomis-logging
+
   ocomis-authentication-api:
     image: "blutner/ocomis-authentication-api:latest"
+    networks:
+      - ocomis-services
+      - ocomis-logging
+
 #  ocomis-note-ui:
 #    image: "blutner/ocomis-note-ui:latest"
 #  ocomis-note-api:
 #    image: "blutner/ocomis-note-api:latest"
 
-  user-database:
+  ocomis-user-database:
     restart: always
     image: postgres:10.1
-    ports:
-      - "5432:5432"
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=testtest
       - POSTGRES_DB=ocomis-user
+    networks:
+      - ocomis-services
+
+networks:
+  ocomis-services:
+    driver: bridge
+  ocomis-logging:
+    external:
+      name: ocomislogging_ocomis-logging
