@@ -7,6 +7,12 @@ services:
       - "80:80"
     networks:
       - ocomis-services
+    depends_on:
+      - ocomis-info
+      - ocomis-user-ui
+      - ocomis-user-api
+      - ocomis-authentication-ui
+      - ocomis-authentication-api
 
   ocomis-info:
     image: "blutner/ocomis-info:latest"
