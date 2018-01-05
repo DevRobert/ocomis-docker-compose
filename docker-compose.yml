@@ -33,6 +33,8 @@ services:
     networks:
       - ocomis-services
       - ocomis-logging
+    environment:
+      - NODE_ENV=testing
 
   ocomis-authentication-ui:
     image: "blutner/ocomis-authentication-ui:latest"
